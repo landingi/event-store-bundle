@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+#    Landingi\EventStoreBundle\EventStore\DbalEventStore:
+#        class: Landingi\EventStoreBundle\EventStore\DbalEventStore
+#        arguments: ['@doctrine.dbal.default_connection']
+
+#    Landingi\EventStoreBundle\EventStore:
+#        class: Landingi\EventStoreBundle\EventStore
+#        arguments: ['@Landingi\EventStoreBundle\EventStore\DbalEventStore']
+#        calls:
+#            - [addListener, ['@your-event-listener']]
