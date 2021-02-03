@@ -3,6 +3,7 @@ services:
         autowire: true
         autoconfigure: true
 
+# TODO Create Symfony Flex-Recipe
 #    Landingi\EventStoreBundle\EventStore\DbalEventStore:
 #        class: Landingi\EventStoreBundle\EventStore\DbalEventStore
 #        arguments: ['@doctrine.dbal.default_connection']
