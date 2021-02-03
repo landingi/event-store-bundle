@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace Landingi\EventStoreBundle\Event;
 
 use DateTime;
+use JsonSerializable;
 
-final class CreatedAt implements \JsonSerializable
+final class CreatedAt implements JsonSerializable
 {
     private DateTime $createdAt;
 

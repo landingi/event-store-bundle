@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace Landingi\EventStoreBundle\Event;
 
+use JsonSerializable;
 use Symfony\Component\Uid\Uuid;
 
-final class AggregateUuid implements \JsonSerializable
+final class AggregateUuid implements JsonSerializable
 {
     private Uuid $uuid;
 

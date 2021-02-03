@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Landingi\EventStoreBundle\Event;
 
-final class SourceIp implements \JsonSerializable
+use JsonSerializable;
+
+final class SourceIp implements JsonSerializable
 {
     private string $sourceIp;
 

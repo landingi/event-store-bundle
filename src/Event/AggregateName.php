@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Landingi\EventStoreBundle\Event;
 
-final class AggregateName implements \JsonSerializable
+use JsonSerializable;
+
+final class AggregateName implements JsonSerializable
 {
     private string $name;
 
