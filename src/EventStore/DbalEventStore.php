@@ -24,14 +24,14 @@ final class DbalEventStore implements EventStore
     {
         $this->connection->insert('events_store', [
             'account_uuid' => $event->getAccountUuid()->jsonSerialize(),
-            'subaccount_uuid' => $event->getSubaccountUuid() ? $event->getSubAccountUuid()->jsonSerialize() : null,
-            'user_uuid' => $event->getUserUuid()->jsonSerialize(),
             'aggregate_name' => $event->getAggregateName()->jsonSerialize(),
             'aggregate_uuid' => $event->getAggregateUuid()->jsonSerialize(),
+            'created_at' => $event->getCreatedAt()->jsonSerialize(),
             'event_name' => $event->getName()->jsonSerialize(),
             'event_data' => json_encode($event->getEventData()->jsonSerialize(), JSON_THROW_ON_ERROR),
             'event_source_ip' => $event->getSourceIp() ? $event->getSourceIp()->jsonSerialize() : null,
-            'created_at' => $event->getCreatedAt()->jsonSerialize(),
+            'subaccount_uuid' => $event->getSubaccountUuid() ? $event->getSubAccountUuid()->jsonSerialize() : null,
+            'user_uuid' => $event->getUserUuid()->jsonSerialize(),
         ]);
     }
 }
