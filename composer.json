@@ -1,7 +1,7 @@
 {
     "name": "landingi/event-store-bundle",
     "license": "MIT",
-    "description": "",
+    "description": "Landingi event store bundle implementation",
     "type": "symfony-bundle",
     "version": "1.0.0",
     "autoload" : {

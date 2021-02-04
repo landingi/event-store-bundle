@@ -1,6 +1,6 @@
 services:
-    symfony-package:
-        container_name: "symfony-package"
+    event-store-bundle:
+        container_name: "event-store-bundle"
         image: ferror/symfony-image
         command: ["make", "run"]
         volumes:
