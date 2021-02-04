@@ -1,5 +1,9 @@
 /vendor/
 
+###> composer/composer ###
+composer.lock
+###< composer/composer ###
+
 ###> phpunit/phpunit ###
 .phpunit
 .phpunit.result.cache
