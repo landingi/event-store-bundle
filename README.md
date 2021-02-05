@@ -9,18 +9,13 @@ Landingi Event Store Implementation
 Add to your `service.yaml` Event Store service definition
 
 ```yaml
-Landingi\EventStoreBundle\EventStore\DbalEventStore:
+landingi.event-store.dbal:
     class: Landingi\EventStoreBundle\EventStore\DbalEventStore
     arguments: ['@doctrine.dbal.default_connection']
-```
 
-### Event Listener
-Add to your `service.yaml` file definition
-
-```yaml
 Landingi\EventStoreBundle\EventStore:
-    class: Landingi\EventStoreBundle\EventStore
-    arguments: ['@Landingi\EventStoreBundle\EventStore\DbalEventStore']
+    class: Landingi\EventStoreBundle\EventStore\ListenerEventStore
+    arguments: ['@landingi.event-store.dbal']
     calls:
         - [addListener, ['@your-event-listener-service']]
 ```
