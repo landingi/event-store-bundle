@@ -8,6 +8,8 @@ Landingi Event Store Implementation
 
 ## Requirements
 * php >= 7.4
+* Doctrine 2.0 || 3.0
+* Symfony >= 5.2
 
 ## Configuration
 ### Event Store
