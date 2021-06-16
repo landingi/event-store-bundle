@@ -31,6 +31,7 @@ final class AuditLogEvent
     private ?AccountUuid $subaccountUuid;
 
     public function __construct(
+        CreatedAt $createdAt,
         EventName $name,
         EventData $data,
         AggregateName $aggregateName,
@@ -43,11 +44,11 @@ final class AuditLogEvent
         SourceIp $sourceIp = null,
         AccountUuid $subaccountUuid = null
     ) {
+        $this->createdAt = $createdAt;
         $this->name = $name;
         $this->data = $data;
         $this->aggregateName = $aggregateName;
         $this->aggregateUuid = $aggregateUuid;
-        $this->createdAt = new CreatedAt(new \DateTime());
         $this->accountUuid = $accountUuid;
         $this->userUuid = $userUuid;
         $this->sourceIp = $sourceIp;

@@ -128,6 +128,7 @@ final class AuditLogListener implements EventListener
         if (in_array((string) $event->getName(), self::AUDITLOG_EVENTS, true)) {
             $this->auditLogClient->store(
                 new AuditLogEvent(
+                    $event->getCreatedAt(),
                     $event->getName(),
                     $event->getEventData(),
                     $event->getAggregateName(),
