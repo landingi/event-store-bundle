@@ -9,12 +9,12 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class SymfonyHttpAuditLogClient implements AuditLogClient
 {
-    private string $baseUrl;
+    private string $auditLogApiBaseUrl;
     private HttpClientInterface $httpClient;
 
-    public function __construct(string $baseUrl, HttpClientInterface $httpClient)
+    public function __construct(string $auditLogApiBaseUrl, HttpClientInterface $httpClient)
     {
-        $this->baseUrl = $baseUrl;
+        $this->auditLogApiBaseUrl = $auditLogApiBaseUrl;
         $this->httpClient = $httpClient;
     }
 
@@ -22,7 +22,7 @@ final class SymfonyHttpAuditLogClient implements AuditLogClient
     {
         $this->httpClient->request(
             'POST',
-            "{$this->baseUrl}/v1/events",
+            "{$this->auditLogApiBaseUrl}/v1/events",
             [
                 'json' => [
                     'event_name' => $event->getName(),
