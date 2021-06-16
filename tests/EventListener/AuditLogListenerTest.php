@@ -19,7 +19,6 @@ use Symfony\Component\Uid\Uuid;
 
 class AuditLogListenerTest extends TestCase
 {
-
     public function testItTransformEventToAuditLogEvent(): void
     {
         $listener = new AuditLogListener(
