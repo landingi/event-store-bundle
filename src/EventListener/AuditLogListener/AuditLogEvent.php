@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Landingi\EventStoreBundle\EventListener\AuditLogListener;
 
+use JsonSerializable;
 use Landingi\EventStoreBundle\Event\AccountUuid;
 use Landingi\EventStoreBundle\Event\AggregateName;
 use Landingi\EventStoreBundle\Event\AggregateUuid;
@@ -15,7 +16,7 @@ use Landingi\EventStoreBundle\Event\AccountName;
 use Landingi\EventStoreBundle\Event\UserEmail;
 use Landingi\EventStoreBundle\Event\UserRole;
 
-final class AuditLogEvent
+final class AuditLogEvent implements JsonSerializable
 {
     private EventName $name;
     private EventData $data;
@@ -28,7 +29,7 @@ final class AuditLogEvent
     private UserEmail $userEmail;
     private UserRole $userRole;
     private ?SourceIp $sourceIp;
-    private ?AccountUuid $subaccountUuid;
+    private ?AccountUuid $subAccountUuid;
 
     public function __construct(
         CreatedAt $createdAt,
@@ -42,7 +43,7 @@ final class AuditLogEvent
         UserEmail $userEmail,
         UserRole $userRole,
         SourceIp $sourceIp = null,
-        AccountUuid $subaccountUuid = null
+        AccountUuid $subAccountUuid = null
     ) {
         $this->createdAt = $createdAt;
         $this->name = $name;
@@ -52,69 +53,27 @@ final class AuditLogEvent
         $this->accountUuid = $accountUuid;
         $this->userUuid = $userUuid;
         $this->sourceIp = $sourceIp;
-        $this->subaccountUuid = $subaccountUuid;
+        $this->subAccountUuid = $subAccountUuid;
         $this->accountName = $accountName;
         $this->userEmail = $userEmail;
         $this->userRole = $userRole;
     }
 
-    public function getName(): EventName
+    public function jsonSerialize(): array
     {
-        return $this->name;
-    }
-
-    public function getEventData(): EventData
-    {
-        return $this->data;
-    }
-
-    public function getAggregateName(): AggregateName
-    {
-        return $this->aggregateName;
-    }
-
-    public function getAggregateUuid(): AggregateUuid
-    {
-        return $this->aggregateUuid;
-    }
-
-    public function getCreatedAt(): CreatedAt
-    {
-        return $this->createdAt;
-    }
-
-    public function getAccountUuid(): AccountUuid
-    {
-        return $this->accountUuid;
-    }
-
-    public function getAccountName(): AccountName
-    {
-        return $this->accountName;
-    }
-
-    public function getUserUuid(): UserUuid
-    {
-        return $this->userUuid;
-    }
-
-    public function getUserEmail(): UserEmail
-    {
-        return $this->userEmail;
-    }
-
-    public function getUserRole(): UserRole
-    {
-        return $this->userRole;
-    }
-
-    public function getSourceIp(): ?SourceIp
-    {
-        return $this->sourceIp;
-    }
-
-    public function getSubaccountUuid(): ?AccountUuid
-    {
-        return $this->subaccountUuid;
+        return [
+            'event_name' => $this->name,
+            'event_data' => $this->data,
+            'event_source_ip' => $this->sourceIp,
+            'aggregate_name' => $this->aggregateName,
+            'aggregate_uuid' => $this->aggregateUuid,
+            'account_uuid' => $this->accountUuid,
+            'account_name' => $this->accountName,
+            'subaccount_uuid' => $this->subAccountUuid,
+            'user_uuid' => $this->userUuid,
+            'user_email' => $this->userEmail,
+            'user_role' => $this->userRole,
+            'created_at' => $this->createdAt,
+        ];
     }
 }

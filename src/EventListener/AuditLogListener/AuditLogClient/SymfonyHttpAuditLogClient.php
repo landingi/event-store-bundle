@@ -23,22 +23,7 @@ final class SymfonyHttpAuditLogClient implements AuditLogClient
         $this->auditLogApiHttpClient->request(
             'POST',
             "{$this->auditLogApiBaseUrl}/v1/events",
-            [
-                'json' => [
-                    'event_name' => $event->getName(),
-                    'event_data' => $event->getEventData(),
-                    'event_source_ip' => $event->getSourceIp(),
-                    'aggregate_name' => $event->getAggregateName(),
-                    'aggregate_uuid' => $event->getAggregateUuid(),
-                    'account_uuid' => $event->getAccountUuid(),
-                    'account_name' => $event->getAccountName(),
-                    'subaccount_uuid' => $event->getSubaccountUuid(),
-                    'user_uuid' => $event->getUserUuid(),
-                    'user_email' => $event->getUserEmail(),
-                    'user_role' => $event->getUserRole(),
-                    'created_at' => $event->getCreatedAt(),
-                ]
-            ]
+            ['json' => $event]
         );
     }
 }
