@@ -11,6 +11,7 @@ use Landingi\EventStoreBundle\Event\EventData;
 use Landingi\EventStoreBundle\Event\EventName;
 use Landingi\EventStoreBundle\Event\SourceIp;
 use Landingi\EventStoreBundle\Event\UserUuid;
+use Landingi\EventStoreBundle\EventListener\AuditLogListener\AuditLogEvent;
 
 final class Event
 {
@@ -88,5 +89,28 @@ final class Event
     public function getSubaccountUuid(): ?AccountUuid
     {
         return $this->subaccountUuid;
+    }
+
+    public function toAuditLogEvent(EventDataStore $eventDataStore): AuditLogEvent
+    {
+        return new AuditLogEvent(
+            $this->createdAt,
+            $this->name,
+            $this->data,
+            $this->aggregateName,
+            $this->aggregateUuid,
+            $this->accountUuid,
+            $eventDataStore->getAccountName($this->accountUuid),
+            $this->userUuid,
+            $eventDataStore->getUserEmail($this->userUuid),
+            $eventDataStore->getUserRole($this->userUuid),
+            $this->sourceIp,
+            $this->subaccountUuid
+        );
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->name;
     }
 }

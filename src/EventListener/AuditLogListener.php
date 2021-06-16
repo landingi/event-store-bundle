@@ -6,7 +6,6 @@ namespace Landingi\EventStoreBundle\EventListener;
 use Landingi\EventStoreBundle\Event;
 use Landingi\EventStoreBundle\EventListener;
 use Landingi\EventStoreBundle\EventListener\AuditLogListener\AuditLogClient;
-use Landingi\EventStoreBundle\EventListener\AuditLogListener\AuditLogEvent;
 use Landingi\EventStoreBundle\EventDataStore;
 
 final class AuditLogListener implements EventListener
@@ -125,21 +124,10 @@ final class AuditLogListener implements EventListener
 
     public function onEvent(Event $event): void
     {
-        if (in_array((string) $event->getName(), self::AUDITLOG_EVENTS, true)) {
+        if (in_array((string) $event, self::AUDITLOG_EVENTS, true)) {
             $this->auditLogClient->store(
-                new AuditLogEvent(
-                    $event->getCreatedAt(),
-                    $event->getName(),
-                    $event->getEventData(),
-                    $event->getAggregateName(),
-                    $event->getAggregateUuid(),
-                    $event->getAccountUuid(),
-                    $this->auditLogEventData->getAccountName($event->getAccountUuid()),
-                    $event->getUserUuid(),
-                    $this->auditLogEventData->getUserEmail($event->getUserUuid()),
-                    $this->auditLogEventData->getUserRole($event->getUserUuid()),
-                    $event->getSourceIp(),
-                    $event->getSubaccountUuid(),
+                $event->toAuditLogEvent(
+                    $this->auditLogEventData
                 )
             );
         }
