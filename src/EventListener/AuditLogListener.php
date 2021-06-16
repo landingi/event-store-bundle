@@ -5,23 +5,23 @@ namespace Landingi\EventStoreBundle\EventListener;
 
 use Landingi\EventStoreBundle\Event;
 use Landingi\EventStoreBundle\EventListener;
-use Landingi\EventStoreBundle\EventListener\AuditLogListener\AuditLogClient;
 use Landingi\EventStoreBundle\EventDataStore;
+use Landingi\EventStoreBundle\EventStore;
 
 final class AuditLogListener implements EventListener
 {
     private EventDataStore $auditLogEventData;
-    private AuditLogClient $auditLogClient;
+    private EventStore $eventStore;
 
-    public function __construct(EventDataStore $auditLogEventData, AuditLogClient $auditLogClient)
+    public function __construct(EventDataStore $auditLogEventData, EventStore $eventStore)
     {
         $this->auditLogEventData = $auditLogEventData;
-        $this->auditLogClient = $auditLogClient;
+        $this->eventStore = $eventStore;
     }
 
     public function onEvent(Event $event): void
     {
-        $this->auditLogClient->store(
+        $this->eventStore->store(
             $event->toAuditLogEvent(
                 $this->auditLogEventData
             )

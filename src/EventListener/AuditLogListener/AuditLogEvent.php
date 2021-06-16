@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Landingi\EventStoreBundle\EventListener\AuditLogListener;
 
 use JsonSerializable;
+use Landingi\EventStoreBundle\Event;
 use Landingi\EventStoreBundle\Event\AccountUuid;
 use Landingi\EventStoreBundle\Event\AggregateName;
 use Landingi\EventStoreBundle\Event\AggregateUuid;
@@ -16,7 +17,7 @@ use Landingi\EventStoreBundle\Event\AccountName;
 use Landingi\EventStoreBundle\Event\UserEmail;
 use Landingi\EventStoreBundle\Event\UserRole;
 
-final class AuditLogEvent implements JsonSerializable
+final class AuditLogEvent extends Event implements JsonSerializable
 {
     private EventName $name;
     private EventData $data;
@@ -57,6 +58,14 @@ final class AuditLogEvent implements JsonSerializable
         $this->accountName = $accountName;
         $this->userEmail = $userEmail;
         $this->userRole = $userRole;
+        parent::__construct(
+            $name,
+            $data,
+            $aggregateName,
+            $aggregateUuid,
+            $accountUuid,
+            $userUuid
+        );
     }
 
     public function jsonSerialize(): array

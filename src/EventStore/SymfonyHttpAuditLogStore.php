@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Landingi\EventStoreBundle\EventListener\AuditLogListener\AuditLogClient;
+namespace Landingi\EventStoreBundle\EventStore;
 
-use Landingi\EventStoreBundle\EventListener\AuditLogListener\AuditLogClient;
-use Landingi\EventStoreBundle\EventListener\AuditLogListener\AuditLogEvent;
+use Landingi\EventStoreBundle\Event;
+use Landingi\EventStoreBundle\EventStore;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-final class SymfonyHttpAuditLogClient implements AuditLogClient
+final class SymfonyHttpAuditLogStore implements EventStore
 {
     private string $auditLogApiBaseUrl;
     private HttpClientInterface $auditLogApiHttpClient;
@@ -18,7 +18,7 @@ final class SymfonyHttpAuditLogClient implements AuditLogClient
         $this->auditLogApiHttpClient = $auditLogApiHttpClient;
     }
 
-    public function store(AuditLogEvent $event): void
+    public function store(Event $event): void
     {
         $this->auditLogApiHttpClient->request(
             'POST',

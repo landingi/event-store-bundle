@@ -13,7 +13,7 @@ use Landingi\EventStoreBundle\Event\SourceIp;
 use Landingi\EventStoreBundle\Event\UserUuid;
 use Landingi\EventStoreBundle\EventListener\AuditLogListener\AuditLogEvent;
 
-final class Event
+class Event
 {
     private EventName $name;
     private EventData $data;
