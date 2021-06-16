@@ -10,17 +10,17 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 final class SymfonyHttpAuditLogClient implements AuditLogClient
 {
     private string $auditLogApiBaseUrl;
-    private HttpClientInterface $auditLogHttpClient;
+    private HttpClientInterface $auditLogApiHttpClient;
 
-    public function __construct(string $auditLogApiBaseUrl, HttpClientInterface $auditLogHttpClient)
+    public function __construct(string $auditLogApiBaseUrl, HttpClientInterface $auditLogApiHttpClient)
     {
         $this->auditLogApiBaseUrl = $auditLogApiBaseUrl;
-        $this->auditLogHttpClient = $auditLogHttpClient;
+        $this->auditLogApiHttpClient = $auditLogApiHttpClient;
     }
 
     public function store(AuditLogEvent $event): void
     {
-        $this->auditLogHttpClient->request(
+        $this->auditLogApiHttpClient->request(
             'POST',
             "{$this->auditLogApiBaseUrl}/v1/events",
             [
