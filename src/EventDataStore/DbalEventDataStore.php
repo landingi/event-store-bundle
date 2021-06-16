@@ -15,42 +15,28 @@ use RuntimeException;
 final class DbalEventDataStore implements EventDataStore
 {
     private Connection $connection;
-    private array $cache;
 
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->cache = [];
     }
 
     public function getUserRole(UserUuid $userUuid): UserRole
     {
-        if (false === isset($this->cache[(string) $userUuid])) {
-            $this->fetchUserData($userUuid);
-        }
-
-        return new UserRole($this->cache[(string) $userUuid]['role']);
+        return new UserRole($this->fetchUserData($userUuid)['role']);
     }
 
     public function getUserEmail(UserUuid $userUuid): UserEmail
     {
-        if (false === isset($this->cache[(string) $userUuid])) {
-            $this->fetchUserData($userUuid);
-        }
-
-        return new UserEmail($this->cache[(string) $userUuid]['email']);
+        return new UserEmail($this->fetchUserData($userUuid)['email']);
     }
 
     public function getAccountName(AccountUuid $accountUuid): AccountName
     {
-        if (false === isset($this->cache[(string) $accountUuid])) {
-            $this->fetchAccountData($accountUuid);
-        }
-
-        return new AccountName($this->cache[(string) $accountUuid]['email']);
+        return new AccountName($this->fetchAccountData($accountUuid));
     }
 
-    private function fetchUserData(UserUuid $userUuid): void
+    private function fetchUserData(UserUuid $userUuid): array
     {
         $query = $this->connection->createQueryBuilder();
         $query->select('email, role');
@@ -66,25 +52,19 @@ final class DbalEventDataStore implements EventDataStore
             throw new RuntimeException("Could not fetch user data for UUID: $userUuid");
         }
 
-        $this->cache[(string) $userUuid] = $result;
+        return $result;
     }
 
-    private function fetchAccountData(AccountUuid $accountUuid): void
+    private function fetchAccountData(AccountUuid $accountUuid): string
     {
         $query = $this->connection->createQueryBuilder();
         $query->select('name');
         $query->from('accounts');
         $query->where('uuid = :account_uuid');
         $query->setParameter('account_uuid', (string) $accountUuid);
-        $result = $this->connection->executeQuery(
+        return (string) $this->connection->executeQuery(
             $query->getSQL(),
             $query->getParameters()
-        )->fetchAssociative();
-
-        if (false === is_array($result)) {
-            throw new RuntimeException("Could not fetch account data for UUID: $accountUuid");
-        }
-
-        $this->cache[(string) $accountUuid] = $result;
+        )->fetchOne();
     }
 }
