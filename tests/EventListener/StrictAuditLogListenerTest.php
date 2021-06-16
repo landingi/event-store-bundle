@@ -33,6 +33,7 @@ class StrictAuditLogListenerTest extends TestCase
                 new UserUuid(Uuid::v4()),
             )
         );
+
         self::assertEquals(
             [$event],
             $recorder->getEvents()
@@ -54,6 +55,7 @@ class StrictAuditLogListenerTest extends TestCase
                 new UserUuid(Uuid::v4()),
             )
         );
+
         self::assertEmpty(
             $recorder->getEvents()
         );
