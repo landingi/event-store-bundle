@@ -64,7 +64,10 @@ final class AuditLogEvent extends Event implements JsonSerializable
             $aggregateName,
             $aggregateUuid,
             $accountUuid,
-            $userUuid
+            $userUuid,
+            $sourceIp,
+            $subAccountUuid,
+            $createdAt
         );
     }
 

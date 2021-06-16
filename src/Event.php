@@ -33,13 +33,14 @@ class Event
         AccountUuid $accountUuid,
         UserUuid $userUuid,
         SourceIp $sourceIp = null,
-        AccountUuid $subaccountUuid = null
+        AccountUuid $subaccountUuid = null,
+        CreatedAt $createdAt = null
     ) {
         $this->name = $name;
         $this->data = $data;
         $this->aggregateName = $aggregateName;
         $this->aggregateUuid = $aggregateUuid;
-        $this->createdAt = new CreatedAt(new \DateTime());
+        $this->createdAt = $createdAt ?: new CreatedAt(new \DateTime());
         $this->accountUuid = $accountUuid;
         $this->userUuid = $userUuid;
         $this->sourceIp = $sourceIp;
