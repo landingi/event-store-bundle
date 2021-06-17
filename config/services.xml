@@ -5,8 +5,14 @@
         https://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="landingi_event_store.auditlog.store" class="Landingi\EventStoreBundle\EventStore\SymfonyHttpAuditLogStore">
+        <service id="landingi_event_store.store.dbal" class="Landingi\EventStoreBundle\EventStore\DbalEventStore">
             <argument></argument>
+        </service>
+        <service
+                id="landingi_event_store.store.listener"
+                class="Landingi\EventStoreBundle\EventStore\ListenerEventStore"
+        >
+            <argument type="service" id="landingi_event_store.store.dbal"></argument>
         </service>
     </services>
 </container>
