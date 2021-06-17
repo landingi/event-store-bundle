@@ -8,11 +8,9 @@
         <service id="landingi_event_store.store.dbal" class="Landingi\EventStoreBundle\EventStore\DbalEventStore">
             <argument></argument>
         </service>
-        <service
-                id="landingi_event_store.store.listener"
-                class="Landingi\EventStoreBundle\EventStore\ListenerEventStore"
-        >
+        <service id="landingi_event_store.store.listener" class="Landingi\EventStoreBundle\EventStore\ListenerEventStore">
             <argument type="service" id="landingi_event_store.store.dbal"></argument>
         </service>
+        <service id="Landingi\EventStoreBundle\EventStore" alias="landingi_event_store.store.listener" />
     </services>
 </container>
