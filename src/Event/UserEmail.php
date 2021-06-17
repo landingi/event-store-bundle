@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Landingi\EventStoreBundle\Event;
 
-final class UserEmail
+use JsonSerializable;
+
+final class UserEmail implements JsonSerializable
 {
     private string $email;
 
