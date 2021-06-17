@@ -74,18 +74,18 @@ final class AuditLogEvent extends Event implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'created_at' => $this->createdAt,
             'event_name' => $this->name,
-            'event_data' => $this->data,
-            'event_source_ip' => $this->sourceIp,
+            'event_data' => json_encode($this->data),
             'aggregate_name' => $this->aggregateName,
             'aggregate_uuid' => $this->aggregateUuid,
             'account_uuid' => $this->accountUuid,
             'account_name' => $this->accountName,
-            'subaccount_uuid' => $this->subAccountUuid,
             'user_uuid' => $this->userUuid,
             'user_email' => $this->userEmail,
             'user_role' => $this->userRole,
-            'created_at' => $this->createdAt,
+            'event_source_ip' => $this->sourceIp,
+            'subaccount_uuid' => $this->subAccountUuid,
         ];
     }
 }

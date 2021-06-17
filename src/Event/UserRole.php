@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Landingi\EventStoreBundle\Event;
 
-final class UserRole
+use JsonSerializable;
+
+final class UserRole implements JsonSerializable
 {
     private string $role;
 
