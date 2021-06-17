@@ -33,12 +33,12 @@ Landingi\EventStoreBundle\EventStore:
 ```yaml
 landingi_event_store:
   event_store:
-    connection: 'doctrine.dbal.default_connection'
+    connection: 'doctrine.dbal.default_connection' # landingi_production DB connection
   auditlog:
-    enabled: true
-    endpoint: 'http://audit-log'
-    client: 'http_client'
-    strict_mode: true
+    enabled: true                # set to false to disable auditlog listener
+    endpoint: 'http://audit-log' # base URL endpoint for HTTP client
+    client: 'http_client'        # instance of Symfony\Contracts\HttpClient\HttpClientInterface interface
+    strict_mode: true            # set to false to ignore StrictAuditLogListener allowed events list
 ```
 
 2. To `config/bundles.php` add:
