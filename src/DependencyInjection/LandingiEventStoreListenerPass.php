@@ -5,6 +5,7 @@ namespace Landingi\EventStoreBundle\DependencyInjection;
 
 use Landingi\EventStoreBundle\EventDataStore\DbalEventDataStore;
 use Landingi\EventStoreBundle\EventListener\AuditLogListener;
+use Landingi\EventStoreBundle\EventListener\StrictAuditLogListener;
 use Landingi\EventStoreBundle\EventStore\SymfonyHttpAuditLogStore;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -47,6 +48,15 @@ final class LandingiEventStoreListenerPass implements CompilerPassInterface
                     ]
                 )
             )->addTag(self::LISTENER_TAG);
+
+            if ($container->getParameter('landingi_event_store.auditlog.strict_mode')) {
+                $container->setDefinition(
+                    'landingi_event_store.auditlog.listener.strict_mode_decorator',
+                    new Definition(StrictAuditLogListener::class)
+                )
+                    ->setDecoratedService('landingi_event_store.auditlog.listener')
+                    ->setArgument(0, $container->getDefinition('landingi_event_store.auditlog.listener'));
+            }
         }
 
         $container->getDefinition('landingi_event_store.store.dbal')->replaceArgument(0, $connection);

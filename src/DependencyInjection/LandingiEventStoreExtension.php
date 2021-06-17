@@ -20,6 +20,7 @@ final class LandingiEventStoreExtension extends Extension
         if ($config['auditlog']['enabled']) {
             $container->setParameter('landingi_event_store.auditlog.endpoint', $config['auditlog']['endpoint']);
             $container->setParameter('landingi_event_store.auditlog.client', $config['auditlog']['client']);
+            $container->setParameter('landingi_event_store.auditlog.strict_mode', $config['auditlog']['strict_mode']);
         }
 
         $container->setParameter('landingi_event_store.event_store.connection', $config['event_store']['connection']);
