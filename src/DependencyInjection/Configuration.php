@@ -24,7 +24,7 @@ final class Configuration implements ConfigurationInterface
                 ->children()
                     ->scalarNode('connection')
                         ->isRequired()
-                        ->info('The connection you for event store database')
+                        ->info('Connection to landingi_production DB')
                         ->example('doctrine.dbal.mysql_connection')
                         ->validate()
                         ->ifTrue(fn ($v) => !is_string($v))
