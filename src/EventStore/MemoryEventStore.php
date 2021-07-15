@@ -9,12 +9,17 @@ use Landingi\EventStoreBundle\EventStore;
 final class MemoryEventStore implements EventStore
 {
     /**
-     * @var array|Event[]
+     * @var Event[]
      */
     private array $events = [];
 
     public function store(Event $event): void
     {
         $this->events[] = $event;
+    }
+
+    public function getEvents(): array
+    {
+        return $this->events;
     }
 }

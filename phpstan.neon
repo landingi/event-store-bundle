@@ -1,6 +1,2 @@
-parameters:
-	level: 7
-	paths:
-		- src
-		- tests
-	checkMissingIterableValueType: false
+includes:
+	- vendor/landingi/php-coding-standards/phpstan.neon

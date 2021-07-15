@@ -1,7 +1,6 @@
 services:
     event-store-bundle:
-        container_name: "event-store-bundle"
-        image: ferror/symfony-image
+        image: ferror/symfony-image:7.4
         command: ["make", "run"]
         volumes:
             - ./:/app:delegated
