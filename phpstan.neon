@@ -3,5 +3,5 @@ includes:
 
 parameters:
 	  ignoreErrors:
-		    - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::end\(\)#'
-    		- '#Call to an undefined method Symfony\Component\DependencyInjection\ContainerBuilder::getDefinition\(\) expects string, array|bool|float|int|string|null given#'
+	      - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::end\(\)#'
+	      - '#Call to an undefined method Symfony\Component\DependencyInjection\ContainerBuilder::getDefinition\(\) expects string, array|bool|float|int|string|null given#'
