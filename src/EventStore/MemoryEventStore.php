@@ -18,6 +18,9 @@ final class MemoryEventStore implements EventStore
         $this->events[] = $event;
     }
 
+    /**
+     * @return Event[]
+     */
     public function getEvents(): array
     {
         return $this->events;

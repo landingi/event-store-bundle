@@ -19,6 +19,7 @@ final class ListenerEventStore implements EventStore
     public function __construct(EventStore $store)
     {
         $this->store = $store;
+        $this->listeners = [];
     }
 
     public function addListener(EventListener $listener): void
