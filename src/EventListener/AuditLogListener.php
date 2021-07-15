@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Landingi\EventStoreBundle\EventListener;
 
 use Landingi\EventStoreBundle\Event;
-use Landingi\EventStoreBundle\EventListener;
 use Landingi\EventStoreBundle\EventDataStore;
+use Landingi\EventStoreBundle\EventListener;
 use Landingi\EventStoreBundle\EventStore;
 
 final class AuditLogListener implements EventListener

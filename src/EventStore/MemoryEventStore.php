@@ -9,7 +9,7 @@ use Landingi\EventStoreBundle\EventStore;
 final class MemoryEventStore implements EventStore
 {
     /**
-     * @var array|Event[]
+     * @var Event[]
      */
     private array $events = [];
 
@@ -19,7 +19,7 @@ final class MemoryEventStore implements EventStore
     }
 
     /**
-     * @return array|Event[]
+     * @return Event[]
      */
     public function getEvents(): array
     {

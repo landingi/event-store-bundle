@@ -1,10 +1,7 @@
-parameters:
-	level: 7
-	paths:
-		- src
-		- tests
-	checkMissingIterableValueType: false
-	ignoreErrors:
-		- '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::end\(\)#'
-		- '#Call to an undefined method Symfony\Component\DependencyInjection\ContainerBuilder::getDefinition\(\) expects string, array|bool|float|int|string|null given#'
+includes:
+	  - vendor/landingi/php-coding-standards/phpstan.neon
 
+parameters:
+	  ignoreErrors:
+	      - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::end\(\)#'
+	      - '#Call to an undefined method Symfony\Component\DependencyInjection\ContainerBuilder::getDefinition\(\) expects string, array|bool|float|int|string|null given#'
