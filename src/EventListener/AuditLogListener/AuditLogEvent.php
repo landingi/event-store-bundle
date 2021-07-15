@@ -5,6 +5,7 @@ namespace Landingi\EventStoreBundle\EventListener\AuditLogListener;
 
 use JsonSerializable;
 use Landingi\EventStoreBundle\Event;
+use Landingi\EventStoreBundle\Event\AccountName;
 use Landingi\EventStoreBundle\Event\AccountUuid;
 use Landingi\EventStoreBundle\Event\AggregateName;
 use Landingi\EventStoreBundle\Event\AggregateUuid;
@@ -12,10 +13,9 @@ use Landingi\EventStoreBundle\Event\CreatedAt;
 use Landingi\EventStoreBundle\Event\EventData;
 use Landingi\EventStoreBundle\Event\EventName;
 use Landingi\EventStoreBundle\Event\SourceIp;
-use Landingi\EventStoreBundle\Event\UserUuid;
-use Landingi\EventStoreBundle\Event\AccountName;
 use Landingi\EventStoreBundle\Event\UserEmail;
 use Landingi\EventStoreBundle\Event\UserRole;
+use Landingi\EventStoreBundle\Event\UserUuid;
 
 final class AuditLogEvent extends Event implements JsonSerializable
 {

@@ -62,6 +62,7 @@ final class DbalEventDataStore implements EventDataStore
         $query->from('accounts');
         $query->where('uuid = :account_uuid');
         $query->setParameter('account_uuid', (string) $accountUuid);
+
         return (string) $this->connection->executeQuery(
             $query->getSQL(),
             $query->getParameters()
