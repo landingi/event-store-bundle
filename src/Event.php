@@ -52,6 +52,11 @@ class Event
         return $this->name;
     }
 
+    public function getEventName(): string
+    {
+        return $this->name->getName();
+    }
+
     public function getEventData(): EventData
     {
         return $this->data;
