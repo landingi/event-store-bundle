@@ -20,6 +20,11 @@ final class CreatedAt implements JsonSerializable
         return $this->createdAt;
     }
 
+    public function getTimestamp(): int
+    {
+        return $this->createdAt->getTimestamp();
+    }
+
     public function jsonSerialize(): string
     {
         return $this->createdAt->format('Y-m-d H:i:s');

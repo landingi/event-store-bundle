@@ -58,4 +58,20 @@ class EventTest extends TestCase
             $event->toAuditLogEvent($dataStore)
         );
     }
+
+    public function testGenerateTimestamp(): void
+    {
+        $event = new Event(
+            new EventName('foo'),
+            new EventData(['foo' => 'bar']),
+            new AggregateName('account'),
+            new AggregateUuid(Uuid::v4()),
+            new AccountUuid(Uuid::v4()),
+            new UserUuid(Uuid::v4()),
+            new SourceIp('0.0.0.0'),
+            new AccountUuid(Uuid::v4()),
+            new CreatedAt(new DateTime('2022-02-17'))
+        );
+        $this->assertEquals(1645056000, $event->getCreatedAt()->getTimestamp());
+    }
 }
