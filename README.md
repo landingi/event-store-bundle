@@ -1,5 +1,6 @@
 # event-store-bundle
 Landingi Event Store Implementation
+ver. 1.1.1
 
 [![Build Status](https://travis-ci.com/landingi/event-store-bundle.svg?branch=master)](https://travis-ci.com/landingi/event-store-bundle)
 [![License MIT](https://img.shields.io/apm/l/vim-mode.svg)](https://opensource.org/licenses/MIT)
