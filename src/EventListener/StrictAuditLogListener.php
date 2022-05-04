@@ -55,6 +55,7 @@ final class StrictAuditLogListener implements EventListener
         'account_export_lead',
         'account_archive_lead',
         'account_delete_lead',
+        'account_delete_spam_lead',
         'account_restore_lead',
         'account_enable_feature',
         'account_disable_feature',
