@@ -109,6 +109,7 @@ class StrictAuditLogListenerTest extends TestCase
         yield ['account_export_lead'];
         yield ['account_archive_lead'];
         yield ['account_delete_lead'];
+        yield ['account_delete_spamlead'];
         yield ['account_restore_lead'];
         yield ['account_enable_feature'];
         yield ['account_disable_feature'];
