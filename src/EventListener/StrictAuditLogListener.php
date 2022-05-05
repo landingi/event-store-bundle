@@ -70,6 +70,7 @@ final class StrictAuditLogListener implements EventListener
         'account_change_timezone',
         'account_change_package',
         'account_change_default_landing_language',
+        'account_set_payment_gate_settings',
         'agency_edit_user',
         'agency_remove_user',
         'agency_give_user_access_to_subaccount',
