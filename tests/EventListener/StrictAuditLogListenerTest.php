@@ -125,6 +125,8 @@ class StrictAuditLogListenerTest extends TestCase
         yield ['account_change_package'];
         yield ['account_change_default_landing_language'];
         yield ['account_set_payment_gate_settings'];
+        yield ['account_update_payment_gate_settings'];
+        yield ['account_delete_payment_gate_settings'];
         yield ['agency_edit_user'];
         yield ['agency_remove_user'];
         yield ['agency_give_user_access_to_subaccount'];
