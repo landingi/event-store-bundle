@@ -18,16 +18,28 @@ final class LandingiEventStoreListenerPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container): void
     {
-        $connection = $container->getDefinition($container->getParameter('landingi_event_store.event_store.connection'));
+        $connectionParam = $container->getParameter('landingi_event_store.event_store.connection');
+
+        if (false === is_string($connectionParam)) {
+            throw new \RuntimeException('Parameter "landingi_event_store.event_store.connection" is not a string');
+        }
+
+        $connection = $container->getDefinition($connectionParam);
 
         if ($container->hasParameter('landingi_event_store.auditlog.endpoint')) {
+            $clientParam = $container->getParameter('landingi_event_store.auditlog.client');
+
+            if (false === is_string($clientParam)) {
+                throw new \RuntimeException('Parameter "landingi_event_store.auditlog.client" is not a string');
+            }
+
             $container->setDefinition(
                 'landingi_evnet_store.auditlog.store',
                 new Definition(
                     SymfonyHttpAuditLogStore::class,
                     [
                         $container->getParameter('landingi_event_store.auditlog.endpoint'),
-                        $container->getDefinition($container->getParameter('landingi_event_store.auditlog.client')),
+                        $container->getDefinition($clientParam),
                     ]
                 )
             );
