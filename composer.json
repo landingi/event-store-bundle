@@ -18,12 +18,12 @@
         "ext-json": "*",
         "symfony/framework-bundle": "6.0.*",
         "doctrine/dbal": "^2.0|^3.0",
-        "symfony/uid": "6.0.*",
-        "symfony/http-client": "6.0.*"
+        "symfony/uid": "^6.0",
+        "symfony/http-client": "^6.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "landingi/php-coding-standards": "^1.0.0"
+        "landingi/php-coding-standards": "^1.0"
     },
     "config": {
         "allow-plugins": {
