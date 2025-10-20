@@ -35,7 +35,7 @@ class Event
         SourceIp $sourceIp = null,
         AccountUuid $subaccountUuid = null,
         CreatedAt $createdAt = null,
-        public readonly bool $triggeredByAdmin = false
+        public readonly bool $triggeredBySupport = false
     ) {
         $this->name = $name;
         $this->data = $data;
@@ -97,7 +97,7 @@ class Event
     {
         $data = $this->data;
 
-        if ($this->triggeredByAdmin) {
+        if ($this->triggeredBySupport) {
             $data['by_support'] = true;
         }
 
