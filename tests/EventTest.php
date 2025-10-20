@@ -3,6 +3,7 @@
 namespace Landingi\EventStoreBundle;
 
 use DateTime;
+use Generator;
 use Landingi\EventStoreBundle\Event\AccountName;
 use Landingi\EventStoreBundle\Event\AccountUuid;
 use Landingi\EventStoreBundle\Event\AggregateName;
@@ -21,7 +22,10 @@ use Symfony\Component\Uid\Uuid;
 
 class EventTest extends TestCase
 {
-    public function testToAuditLogEvent(): void
+    /**
+     * @dataProvider provideTriggerInformation
+     */
+    public function testToAuditLogEvent(bool $triggeredBySupport): void
     {
         $dataStore = new StaticEventDataStore(
             new UserEmail('admin@example.com'),
@@ -37,14 +41,21 @@ class EventTest extends TestCase
             new UserUuid(Uuid::v4()),
             new SourceIp('0.0.0.0'),
             new AccountUuid(Uuid::v4()),
-            new CreatedAt(new DateTime())
+            new CreatedAt(new DateTime()),
+            $triggeredBySupport
         );
+
+        $expectedEventData = $event->getEventData()->getData();
+
+        if ($triggeredBySupport) {
+            $expectedEventData['by_support'] = true;
+        }
 
         self::assertEquals(
             new AuditLogEvent(
                 $event->getCreatedAt(),
                 $event->getName(),
-                $event->getEventData(),
+                new EventData($expectedEventData),
                 $event->getAggregateName(),
                 $event->getAggregateUuid(),
                 $event->getAccountUuid(),
@@ -57,6 +68,12 @@ class EventTest extends TestCase
             ),
             $event->toAuditLogEvent($dataStore)
         );
+    }
+
+    public function provideTriggerInformation(): Generator
+    {
+        yield 'By support' => [true];
+        yield 'By user' => [false];
     }
 
     public function testGenerateTimestamp(): void
