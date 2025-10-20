@@ -34,7 +34,8 @@ class Event
         UserUuid $userUuid,
         SourceIp $sourceIp = null,
         AccountUuid $subaccountUuid = null,
-        CreatedAt $createdAt = null
+        CreatedAt $createdAt = null,
+        public readonly bool $triggeredByAdmin = false
     ) {
         $this->name = $name;
         $this->data = $data;
@@ -94,10 +95,16 @@ class Event
 
     public function toAuditLogEvent(EventDataStore $eventDataStore): AuditLogEvent
     {
+        $data = $this->data;
+
+        if ($this->triggeredByAdmin) {
+            $data['by_support'] = true;
+        }
+
         return new AuditLogEvent(
             $this->createdAt,
             $this->name,
-            $this->data,
+            $data,
             $this->aggregateName,
             $this->aggregateUuid,
             $this->accountUuid,
