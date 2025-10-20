@@ -95,16 +95,18 @@ class Event
 
     public function toAuditLogEvent(EventDataStore $eventDataStore): AuditLogEvent
     {
-        $data = $this->data;
+        $eventData = $this->data;
 
         if ($this->triggeredBySupport) {
-            $data['by_support'] = true;
+            $rawData = $this->data->getData();
+            $rawData['by_support'] = true;
+            $eventData = new EventData($rawData);
         }
 
         return new AuditLogEvent(
             $this->createdAt,
             $this->name,
-            $data,
+            $eventData,
             $this->aggregateName,
             $this->aggregateUuid,
             $this->accountUuid,
