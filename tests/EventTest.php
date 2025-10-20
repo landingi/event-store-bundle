@@ -22,10 +22,7 @@ use Symfony\Component\Uid\Uuid;
 
 class EventTest extends TestCase
 {
-    /**
-     * @dataProvider provideTriggerInformation
-     */
-    public function testToAuditLogEvent(bool $triggeredBySupport): void
+    public function testToAuditLogEvent(): void
     {
         $dataStore = new StaticEventDataStore(
             new UserEmail('admin@example.com'),
@@ -42,20 +39,13 @@ class EventTest extends TestCase
             new SourceIp('0.0.0.0'),
             new AccountUuid(Uuid::v4()),
             new CreatedAt(new DateTime()),
-            $triggeredBySupport
         );
-
-        $expectedEventData = $event->getEventData()->getData();
-
-        if ($triggeredBySupport) {
-            $expectedEventData['by_support'] = true;
-        }
 
         self::assertEquals(
             new AuditLogEvent(
                 $event->getCreatedAt(),
                 $event->getName(),
-                new EventData($expectedEventData),
+                $event->getEventData(),
                 $event->getAggregateName(),
                 $event->getAggregateUuid(),
                 $event->getAccountUuid(),
@@ -68,12 +58,6 @@ class EventTest extends TestCase
             ),
             $event->toAuditLogEvent($dataStore)
         );
-    }
-
-    public function provideTriggerInformation(): Generator
-    {
-        yield 'By support' => [true];
-        yield 'By user' => [false];
     }
 
     public function testGenerateTimestamp(): void
