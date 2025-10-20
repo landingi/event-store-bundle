@@ -22,6 +22,9 @@ use Symfony\Component\Uid\Uuid;
 
 class EventTest extends TestCase
 {
+    /**
+     * @dataProvider provideTriggerInformation
+     */
     public function testToAuditLogEvent(bool $triggeredBySupport): void
     {
         $dataStore = new StaticEventDataStore(
