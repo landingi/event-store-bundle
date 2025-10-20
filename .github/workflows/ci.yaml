@@ -17,4 +17,3 @@ jobs:
                     php-version: ${{ matrix.php-versions }}
             -   run: composer install
             -   run: make ci
-            -   run: bash <(curl -s https://codecov.io/bash) -f "build/coverage.xml" -t ${{ secrets.CODECOV_TOKEN }}
